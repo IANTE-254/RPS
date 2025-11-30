@@ -8,6 +8,18 @@ const computerScoreDisplay = document.getElementById("computerScoreDisplay");
 let playerScore = 0;
 let computerScore = 0;
 
+function checkWinner() {
+    if (playerScore === 5) {
+        alert("You reached 5 points! You win the game!");
+        console.log("Resetting scores...");
+        resetScores();
+    } else if (computerScore === 5) {
+        alert("Computer reached 5 points! You lose the game!");
+        console.log("Resetting scores...");
+        resetScores();
+    }
+}
+
 function playGame(playerChoice) {
 
     const computerChoice = choices[Math.floor(Math.random() * 3)];
@@ -40,12 +52,14 @@ function playGame(playerChoice) {
             resultsDisplay.classList.remove("redText");
             playerScore++;
             playerScoreDisplay.textContent = playerScore;
+            checkWinner();
             break;
         case "YOU LOSE":
             resultsDisplay.classList.add("redText");
             resultsDisplay.classList.remove("greenText");
             computerScore++;
             computerScoreDisplay.textContent = computerScore;
+            checkWinner();
             break;
         case "TIE!":
             resultsDisplay.classList.remove("redText");
@@ -55,3 +69,9 @@ function playGame(playerChoice) {
 
 }
 
+function resetScores() {
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
+}
